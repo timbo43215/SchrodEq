@@ -6,21 +6,11 @@
 //
 
 import SwiftUI
+import Charts
 
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+struct Contentview {
+    
+    var i = 1
+    for (0.0 <= E) & (E <= 15.0)
+    
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
