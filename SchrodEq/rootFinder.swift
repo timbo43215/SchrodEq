@@ -44,7 +44,7 @@ class RootFinder: ObservableObject {
         newEnergy = Energy - h/2.0
         let term4 = functionToDifferentiate((newEnergy), SchrodingerConstant, xmin, xmax, xstep)
         
-        let extrapolatedDifferenceDerivativeNumerator = 8.0 * (term1 - term2 - term3 - term4)
+        let extrapolatedDifferenceDerivativeNumerator = 8.0 * (term1 - term2) - (term3 - term4)
         
         let extrapolatedDifferenceDerivative = extrapolatedDifferenceDerivativeNumerator/(3.0*h)
         
@@ -94,9 +94,10 @@ class RootFinder: ObservableObject {
         for item in quickSearchResult{
             
             var Energy = item - 2.0*Estep
+            var deltaX = 1.0
             
 //            Newton-Raphson Search
-            for _ in 0...10 {
+            for _ in 0...20 {
 
                 let newtonRaphsonNumerator = function(Energy, SchrodingerConstant, xmin, xmax, xstep)
  
@@ -104,12 +105,12 @@ class RootFinder: ObservableObject {
                 // Extrapolated Difference
                 let newtonRaphsonDenominator = calculateExtrapolatedDifference(functionToDifferentiate: function, h: h, xstep: xstep, SchrodingerConstant: SchrodingerConstant, xmin: xmin, xmax: xmax, Estep: Estep, Energy: Energy)
 
-                let deltaX = -newtonRaphsonNumerator/newtonRaphsonDenominator
+                deltaX = -newtonRaphsonNumerator/newtonRaphsonDenominator
 
                 Energy = Energy + deltaX
 
-                if abs(deltaX) <= Energy.ulp {
-
+                if abs(deltaX) <= (Energy.ulp*10.0) {
+                    print("break")
                     break
 
                 }
@@ -117,7 +118,7 @@ class RootFinder: ObservableObject {
             }
             
             finalRoots.append(Energy)
-            
+            print(Energy, deltaX)
             
         }
         

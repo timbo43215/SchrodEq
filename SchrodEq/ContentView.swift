@@ -48,6 +48,7 @@ struct ContentView: View {
     func calculateWaveFunction(_ Energy: Double, _ SchrodingerConstant: Double, _ xmin: Double, _ xmax: Double, _ step: Double) -> Double {
         // Guess psi prime
         
+        //Clear All Arrays
         myWaveFunctions.psi = []
         myWaveFunctions.psiPrime = []
         myWaveFunctions.psiDoublePrime = []
@@ -71,7 +72,7 @@ struct ContentView: View {
             myWaveFunctions.psiDoublePrime.append(psiDoublePrime)
         }
         let count = myWaveFunctions.psi.count
-        print(Energy, myWaveFunctions.psi[count-1])
+ //       print(Energy, myWaveFunctions.psi[count-1])
         return myWaveFunctions.psi[count-1]
     }
     
@@ -91,11 +92,8 @@ struct ContentView: View {
         let SchrodingerConstant = -((2.0 * m)/pow(hbarc,2.0))
         
         for Energy in stride(from: Emin, through: Emax, by: Estep) {
-//clear all arrays
-            myWaveFunctions.psi = []
-            myWaveFunctions.psiPrime = []
-            myWaveFunctions.psiDoublePrime = []
-            myWaveFunctions.x = []
+
+            
             let _ = calculateWaveFunction(Energy, SchrodingerConstant, xmin, xmax, xstep)
             myFunctionals.Energy.append(Energy)
             let points = myWaveFunctions.psi.count
