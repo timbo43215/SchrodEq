@@ -109,7 +109,8 @@ struct ContentView: View {
         }
         
         let Energies = myRootFinder.rootFinder(functionData: FunctionalForRootFinding, h: 1.0E-5, xstep: xstep, function: calculateWaveFunction, SchrodingerConstant: SchrodingerConstant, xmin: xmin, xmax: xmax, Estep: Estep)
-
+        
+        print(Energies)
         print(-pow(Double.pi,2)/(SchrodingerConstant * pow(xmin - xmax, 2)))
     }
 }
