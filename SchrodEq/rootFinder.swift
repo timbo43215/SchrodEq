@@ -34,7 +34,17 @@ class RootFinder: ObservableObject {
     /// - Returns: deriviative of the function
     func calculateExtrapolatedDifference(functionToDifferentiate: extrapolatedDifferenceFunction, h: Double, xstep: Double, SchrodingerConstant: Double, xmin: Double, xmax: Double, Estep: Double, Energy: Double) -> (Double) {
         
-        let extrapolatedDifferenceDerivativeNumerator = 8.0 * (functionToDifferentiate((Energy + (h/4.0)), SchrodingerConstant, xmin, xmax, xstep) - functionToDifferentiate((Energy - (h/4.0)), SchrodingerConstant, xmin, xmax, xstep) - (functionToDifferentiate(Energy + (h/2.0), SchrodingerConstant, xmin, xmax, xstep) - functionToDifferentiate(Energy - (h/2.0), SchrodingerConstant, xmin, xmax, xstep)))
+        
+        var newEnergy = Energy + h/4.0
+        let term1 = functionToDifferentiate((newEnergy), SchrodingerConstant, xmin, xmax, xstep)
+        newEnergy = Energy - h/4.0
+        let term2 = functionToDifferentiate((newEnergy), SchrodingerConstant, xmin, xmax, xstep)
+        newEnergy = Energy + h/2.0
+        let term3 = functionToDifferentiate((newEnergy), SchrodingerConstant, xmin, xmax, xstep)
+        newEnergy = Energy - h/2.0
+        let term4 = functionToDifferentiate((newEnergy), SchrodingerConstant, xmin, xmax, xstep)
+        
+        let extrapolatedDifferenceDerivativeNumerator = 8.0 * (term1 - term2 - term3 - term4)
         
         let extrapolatedDifferenceDerivative = extrapolatedDifferenceDerivativeNumerator/(3.0*h)
         

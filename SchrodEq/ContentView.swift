@@ -47,6 +47,12 @@ struct ContentView: View {
     }
     func calculateWaveFunction(_ Energy: Double, _ SchrodingerConstant: Double, _ xmin: Double, _ xmax: Double, _ step: Double) -> Double {
         // Guess psi prime
+        
+        myWaveFunctions.psi = []
+        myWaveFunctions.psiPrime = []
+        myWaveFunctions.psiDoublePrime = []
+        myWaveFunctions.x = []
+        
         myWaveFunctions.psiPrime.append(1.0)
         myWaveFunctions.psi.append(0.0)
         myWaveFunctions.x.append(xmin)
@@ -65,6 +71,7 @@ struct ContentView: View {
             myWaveFunctions.psiDoublePrime.append(psiDoublePrime)
         }
         let count = myWaveFunctions.psi.count
+        print(Energy, myWaveFunctions.psi[count-1])
         return myWaveFunctions.psi[count-1]
     }
     
@@ -96,10 +103,10 @@ struct ContentView: View {
             let functionalValue = myWaveFunctions.psi[points-1]
             myFunctionals.Functional.append(functionalValue)
         }
-        let Points = myFunctionals.Energy.count
-        for i in 0...(Points - 1) {
-            print(myFunctionals.Energy[i], myFunctionals.Functional[i])
-        }
+//        let Points = myFunctionals.Energy.count
+//        for i in 0...(Points - 1) {
+//            print(myFunctionals.Energy[i], myFunctionals.Functional[i])
+//        }
         
 // Find the roots of the functional
        // do something here (probably going to call rootFinder function
@@ -108,7 +115,7 @@ struct ContentView: View {
            FunctionalForRootFinding.append([myFunctionals.Energy[i],myFunctionals.Functional[i]])
         }
         
-        let Energies = myRootFinder.rootFinder(functionData: FunctionalForRootFinding, h: 1.0E-5, xstep: xstep, function: calculateWaveFunction, SchrodingerConstant: SchrodingerConstant, xmin: xmin, xmax: xmax, Estep: Estep)
+        let Energies = myRootFinder.rootFinder(functionData: FunctionalForRootFinding, h: 1e-5, xstep: xstep, function: calculateWaveFunction, SchrodingerConstant: SchrodingerConstant, xmin: xmin, xmax: xmax, Estep: Estep)
         
         print(Energies)
         print(-pow(Double.pi,2)/(SchrodingerConstant * pow(xmin - xmax, 2)))
