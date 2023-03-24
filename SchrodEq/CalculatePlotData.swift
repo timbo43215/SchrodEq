@@ -13,7 +13,6 @@ class CalculatePlotData: ObservableObject {
     
     var plotDataModel: PlotDataClass? = nil
     var theText = ""
-    var potentialStringArray = ["Infinite Square Well", "Linear Square Well","Parabolic Well","Square and Linear Well","Square Barrier","Triangle Barrier","Coupled Parabolic Well","Coupled Square Well and Field","Harmonic Oscillator","Kronig Penney"]
 
     @MainActor func setThePlotParameters(color: String, xLabel: String, yLabel: String, title: String) {
         //set the Plot Parameters
@@ -40,51 +39,46 @@ class CalculatePlotData: ObservableObject {
         plotDataModel!.appendData(dataPoint: plotData)
     }
     
-    @MainActor func plotPotential()
-    {
+//    @MainActor func plotPotential()
+//    {
+//        
+//        theText = "Potential\n"
+//        
+//        setThePlotParameters(color: "Blue", xLabel: "x", yLabel: "Potential", title: "Potential")
+//        
+//        resetCalculatedTextOnMainThread()
+//        
+//        
+//        var plotData :[(x: Double, y: Double)] =  []
+//        
+//        for i in 1...myPotentials.x.count {
+//            let X = myPotentials.x[i]
+//            let Y = myPotentials.Potential[i]
+//            plotData.append((x: X, y: Y))
+//        }
+//        
+//       // let dataPoint: (x: Double, y: Double) = (x: x, y: y)
+////        plotData.append(contentsOf: [dataPoint])
+////        theText += "x = \(x), y = \(y)\n"
+//        
+//        
+//        appendDataToPlot(plotData: plotData)
+//        updateCalculatedTextOnMainThread(theText: theText)
+//        
+//    }
         
-        theText = "\(potentialStringArray[selectedFunctionIndex])n"
-        
-         setThePlotParameters(color: "Blue", xLabel: "x", yLabel: "Potential", title: "\(potentialStringArray[selectedFunctionIndex])")
-        
-        resetCalculatedTextOnMainThread()
-        
-        
-        var plotData :[(x: Double, y: Double)] =  []
-        
-        
-        for i in 0 ..< 40 {
-             
-            //create x values here
-            let x = -2.0 + Double(i) * 0.6
-
-        //create y values here
-        let y = x
-
-
-            let dataPoint: (x: Double, y: Double) = (x: x, y: y)
-            plotData.append(contentsOf: [dataPoint])
-            theText += "x = \(x), y = \(y)\n"
-        
-        }
-        
-        appendDataToPlot(plotData: plotData)
-        updateCalculatedTextOnMainThread(theText: theText)
-        
-        
-    }
     
     
-    func ploteFunctional() async
+    @MainActor func plotFunctional()
     {
         
         //set the Plot Parameters
         
-        await setThePlotParameters(color: "Blue", xLabel: "x", yLabel: "y = exp(-x)", title: "y = exp(-x)")
+        setThePlotParameters(color: "Blue", xLabel: "x", yLabel: "Functional", title: "Functional")
         
-        await resetCalculatedTextOnMainThread()
+        resetCalculatedTextOnMainThread()
         
-        theText = "y = exp(-x)\n"
+        theText = "Functional\n"
         
         var plotData :[(x: Double, y: Double)] =  []
         for i in 0 ..< 60 {
@@ -100,8 +94,8 @@ class CalculatePlotData: ObservableObject {
             theText += "x = \(x), y = \(y)\n"
         }
         
-        await appendDataToPlot(plotData: plotData)
-        await updateCalculatedTextOnMainThread(theText: theText)
+        appendDataToPlot(plotData: plotData)
+        updateCalculatedTextOnMainThread(theText: theText)
         
         return
     }
@@ -122,9 +116,9 @@ class CalculatePlotData: ObservableObject {
     @MainActor func plotWaveFunction()
     {
         
-        theText = "\(potentialStringArray[selectedFunctionIndex])n"
+        theText = "Wave Function\n"
         
-         setThePlotParameters(color: "Blue", xLabel: "x", yLabel: "Potential", title: "\(potentialStringArray[selectedFunctionIndex])")
+        setThePlotParameters(color: "Blue", xLabel: "x", yLabel: "Wave Function", title: "Wave Function")
         
         resetCalculatedTextOnMainThread()
         
@@ -138,7 +132,7 @@ class CalculatePlotData: ObservableObject {
             let x = -2.0 + Double(i) * 0.6
 
         //create y values here
-        let y = x
+            let y = x
 
 
             let dataPoint: (x: Double, y: Double) = (x: x, y: y)

@@ -18,6 +18,7 @@ class Potentials: ObservableObject {
         
         x.append(xmin)
         Potential.append(10238472389740.0)
+        //Potential.append(10.0)
         
         for X in stride(from: xmin + step, to: xmax, by: step){
             x.append(X)
@@ -26,6 +27,7 @@ class Potentials: ObservableObject {
         
         x.append(xmax)
         Potential.append(10238472389740.0)
+        //Potential.append(10.0)
     }
     
     func calculateLinearSquareWell(xmin: Double, xmax: Double, step: Double) {
@@ -33,7 +35,8 @@ class Potentials: ObservableObject {
         Potential.removeAll()
         
         x.append(xmin)
-        Potential.append(10238472389740.0)
+       // Potential.append(10238472389740.0)
+        Potential.append(10.0)
         
         for X in stride(from: xmin + step, to: xmax - step, by: step) {
 
@@ -43,7 +46,8 @@ class Potentials: ObservableObject {
         }
         
         x.append(xmax)
-        Potential.append(10238472389740.0)
+       // Potential.append(10238472389740.0)
+        Potential.append(10.0)
     }
     
     func calculateParabolicWell(xmin: Double, xmax: Double, step: Double) {

@@ -27,36 +27,21 @@ struct ContentView: View {
     @State var selectedGraphIndex = 670
     @State var selector = 0
     @State var potentialStringArray = ["Infinite Square Well", "Linear Square Well","Parabolic Well","Square and Linear Well","Square Barrier","Triangle Barrier","Coupled Parabolic Well","Coupled Square Well and Field","Harmonic Oscillator","Kronig Penney"]
+    @State var graphTypeArray = ["Potential", "Functional", "Energy"]
     
     var body: some View {
         HStack{
             VStack {
-                TextField("Xmin:", text: $xmin)
-                TextField("Xmax:", text: $xmax)
-                TextField("Step:", text: $step)
-                TextField("Energy min", text: $emin)
-                TextField("Energy max", text: $emax)
-                TextField("Energy step", text: $estep)
-                TextField("Energies:", text: $eigenValues)
-                TextField("Output 2", text: $output2)
                 
-                Picker("Select Graph Type", selection: $selectedGraphIndex) {
-                    Text("Potential").tag(0)
-                    Text("Functional").tag(1)
-                    Text("Wave Function").tag(2)
-                }
-                .padding(.horizontal)
-                .onChange(of: selectedGraphIndex) { _ in
-                    switch selectedGraphIndex {
-                    case 0:
-                        myCalculatePlotData.plotPotential()
-                    case 1:
-                        myCalculatePlotData.plotFunctional()
-                    case 2:
-                        myPotentials.calculateWaveFunction()
-                    default:
-                        break
-                    }
+                Group{
+                    TextField("Xmin:", text: $xmin)
+                    TextField("Xmax:", text: $xmax)
+                    TextField("Step:", text: $step)
+                    TextField("Energy min", text: $emin)
+                    TextField("Energy max", text: $emax)
+                    TextField("Energy step", text: $estep)
+                    TextField("Energies:", text: $eigenValues)
+                    TextField("Output 2", text: $output2)
                     
                     Picker("Select Function", selection: $selectedFunctionIndex) {
                         Text("Infinite Square Well").tag(0)
@@ -105,50 +90,75 @@ struct ContentView: View {
                         Text("Calculate Eigen Values")
                     }
                     
+                    
                 }
                 
-                VStack{
-                    Group{
-                        HStack(alignment: .center, spacing: 0) {
-                            //Text("Height (cm)")
-                            Text($plotData.plotArray[selector].changingPlotParameters.yLabel.wrappedValue)
-                                .rotationEffect(Angle(degrees: -90))
-                                .foregroundColor(.black)
-                                .padding()
-                            VStack {
-                                Chart($plotData.plotArray[selector].plotData.wrappedValue) {
-                                    LineMark(
-                                        x: .value("Position", $0.xVal),
-                                        y: .value("Height", $0.yVal)
-                                        
-                                    )
-                                    .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
-                                    PointMark(x: .value("Position", $0.xVal), y: .value("Height", $0.yVal))
-                                    
-                                        .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
-                                    
-                                    
-                                }
-                                .chartYAxis {
-                                    AxisMarks(position: .leading)
-                                }
-                                .padding()
-                                Text($plotData.plotArray[selector].changingPlotParameters.xLabel.wrappedValue)
-                                    .foregroundColor(.black)
-                            }
-                        }
-                        // .frame(width: 350, height: 400, alignment: .center)
-                        .frame(alignment: .center)
-                        
+                Picker("Select Graph Type", selection: $selectedGraphIndex) {
+                    Text("Potential").tag(0)
+                    Text("Functional").tag(1)
+                    Text("Wave Function").tag(2)
+                }
+                .padding(.horizontal)
+                .onChange(of: selectedGraphIndex) { _ in
+                    switch selectedGraphIndex {
+                    case 0:
+                        plot(selectedGraphIndex: selectedGraphIndex)
+                    case 1:
+                        plot(selectedGraphIndex: selectedGraphIndex)
+                    case 2:
+                        plot(selectedGraphIndex: selectedGraphIndex)
+                    default:
+                        break
                     }
-                    .padding()
+
+                    
                 }
-                
+
+            
             }
             
-            
+            VStack {
+                Group{
+                    HStack(alignment: .center, spacing: 0) {
+                        //Text("Height (cm)")
+                        Text($plotData.plotArray[selector].changingPlotParameters.yLabel.wrappedValue)
+                            .rotationEffect(Angle(degrees: -90))
+                            .foregroundColor(.black)
+                            .padding()
+                        VStack {
+                            Chart($plotData.plotArray[selector].plotData.wrappedValue) {
+                                LineMark(
+                                    x: .value("Position", $0.xVal),
+                                    y: .value("Height", $0.yVal)
+
+                                )
+                                .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
+                                PointMark(x: .value("Position", $0.xVal), y: .value("Height", $0.yVal))
+
+                                    .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
+
+
+                            }
+                            .chartYAxis {
+                                AxisMarks(position: .leading)
+                            }
+                            //.chartYScale(domain: 0...10)
+                            //.chartXScale(range: 0...5)
+                            .padding()
+                            Text($plotData.plotArray[selector].changingPlotParameters.xLabel.wrappedValue)
+                                .foregroundColor(.black)
+                        }
+                    }
+                    // .frame(width: 350, height: 400, alignment: .center)
+                    .frame(alignment: .center)
+
+                }
+                .padding()
+            }
         }
     }
+    
+    
     func calculateWaveFunction(_ Energy: Double, _ SchrodingerConstant: Double, _ xmin: Double, _ xmax: Double, _ step: Double) -> Double {
         
 
@@ -184,6 +194,37 @@ struct ContentView: View {
         
         
         return myWaveFunctions.psi[count-1]
+    }
+    
+    func plot(selectedGraphIndex: Int) {
+        
+        setObjectWillChange(theObject: self.plotData)
+        myCalculatePlotData.plotDataModel = self.plotData.plotArray[0]
+        
+        
+        myCalculatePlotData.theText = "Potential\n"
+        
+        myCalculatePlotData.setThePlotParameters(color: "Blue", xLabel: "x", yLabel: "Potential", title: "Potential")
+        
+        myCalculatePlotData.resetCalculatedTextOnMainThread()
+        
+        
+        var thePlotData :[(x: Double, y: Double)] =  []
+        
+        for i in 0..<myPotentials.x.count {
+            let X = myPotentials.x[i]
+            let Y = myPotentials.Potential[i]
+            thePlotData.append((x: X, y: Y))
+        }
+        myCalculatePlotData.appendDataToPlot(plotData: thePlotData)
+        
+        setObjectWillChange(theObject: self.plotData)
+    }
+    
+    func setObjectWillChange(theObject:PlotClass){
+        
+        theObject.objectWillChange.send()
+        
     }
     
     func calculateEigenValues() {
@@ -234,9 +275,7 @@ struct ContentView: View {
         for item in Energies{
             plotData.plotArray[0].calculatedText += String(format: "%0.3f\n", item)
         }
-        myCalculatePlotData.plotDataModel = self.plotData.plotArray[0]
-        
-        myCalculatePlotData.plotPotential()
+     
         //print(-pow(Double.pi,2)/(SchrodingerConstant * pow(xmin - xmax, 2)))
         
     }
