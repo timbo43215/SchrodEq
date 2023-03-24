@@ -12,6 +12,10 @@ class Potentials: ObservableObject {
     @Published var Potential: [Double] = []
     
     func calculateInfiniteSquareWell(xmin: Double, xmax: Double, step: Double) {
+        
+        x.removeAll()
+        Potential.removeAll()
+        
         x.append(xmin)
         Potential.append(10238472389740.0)
         
@@ -25,9 +29,14 @@ class Potentials: ObservableObject {
     }
     
     func calculateLinearSquareWell(xmin: Double, xmax: Double, step: Double) {
+        x.removeAll()
+        Potential.removeAll()
+        
+        x.append(xmin)
+        Potential.append(10238472389740.0)
         
         for X in stride(from: xmin + step, to: xmax - step, by: step) {
-            
+
             x.append(X)
             Potential.append((X-xmin)*4.0*1.3)
             //potential.oneDPotentialYArray.append((i-xMin)*0.25)
@@ -38,7 +47,12 @@ class Potentials: ObservableObject {
     }
     
     func calculateParabolicWell(xmin: Double, xmax: Double, step: Double) {
+        x.removeAll()
+        Potential.removeAll()
         
+        x.append(xmin)
+        Potential.append(10238472389740.0)
+
         for X in stride(from: xmin + step, to: xmax - step, by: step) {
             
             x.append(X)
@@ -51,7 +65,12 @@ class Potentials: ObservableObject {
     }
     
     func calculateSquareAndLinearWell(xmin: Double, xmax: Double, step: Double) {
+        x.removeAll()
+        Potential.removeAll()
         
+        x.append(xmin)
+        Potential.append(10238472389740.0)
+
         for X in stride(from: xmin + step, to: (xmax+xmin)/2.0, by: step) {
             
             x.append(X)
@@ -70,7 +89,12 @@ class Potentials: ObservableObject {
     }
     
     func calculateSquareBarrier(xmin: Double, xmax: Double, step: Double) {
+        x.removeAll()
+        Potential.removeAll()
         
+        x.append(xmin)
+        Potential.append(10238472389740.0)
+
         for X in stride(from: xmin + step, to: xmin + (xmax-xmin)*0.4, by: step) {
             
             x.append(X)
@@ -94,7 +118,12 @@ class Potentials: ObservableObject {
     }
     
     func calculateTriangleBarrier(xmin: Double, xmax: Double, step: Double) {
+        x.removeAll()
+        Potential.removeAll()
         
+        x.append(xmin)
+        Potential.append(10238472389740.0)
+
         for X in stride(from: xmin + step, to: xmin + (xmax-xmin)*0.4, by: step) {
             
             x.append(X)
@@ -124,7 +153,12 @@ class Potentials: ObservableObject {
     }
     
     func calculateCoupledParabolicWell(xmin: Double, xmax: Double, step: Double) {
+        x.removeAll()
+        Potential.removeAll()
         
+        x.append(xmin)
+        Potential.append(10238472389740.0)
+
         for X in stride(from: xmin + step, to: xmin + (xmax-xmin)*0.5, by: step) {
             
             x.append(X)
@@ -142,7 +176,12 @@ class Potentials: ObservableObject {
     }
     
     func calculateCoupledSquareWellAndField(xmin: Double, xmax: Double, step: Double) {
-    
+        x.removeAll()
+        Potential.removeAll()
+        
+        x.append(xmin)
+        Potential.append(10238472389740.0)
+
         for X in stride(from: xmin + step, to: xmin + (xmax-xmin)*0.4, by: step) {
             
             x.append(X)
@@ -174,7 +213,12 @@ class Potentials: ObservableObject {
     }
     
     func calculateHarmonicOscillator(xmin: Double, xmax: Double, step: Double) {
-    
+        x.removeAll()
+        Potential.removeAll()
+        
+        x.append(xmin)
+        Potential.append(10238472389740.0)
+
         let xminHO = -20.0
         let xmaxHO = 20.0
         let stepHO = 0.001
@@ -190,7 +234,12 @@ class Potentials: ObservableObject {
     }
     
     func calculateKronigPenney(xmin: Double, xmax: Double, step: Double) {
+        x.removeAll()
+        Potential.removeAll()
         
+        x.append(xmin)
+        Potential.append(10238472389740.0)
+
         let xMinKP = 0.0
         
         let xStepKP = 0.001

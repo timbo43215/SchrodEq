@@ -118,7 +118,7 @@ class RootFinder: ObservableObject {
             }
             
             finalRoots.append(Energy)
-            print(Energy, deltaX)
+           // print(Energy, deltaX)
             
         }
         
