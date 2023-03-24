@@ -23,6 +23,7 @@ struct ContentView: View {
     @ObservedObject var myFunctionals = Functionals()
     @ObservedObject var myRootFinder = RootFinder()
     @ObservedObject var myCalculatePlotData = CalculatePlotData()
+    @ObservedObject var mySolutions = Solutions()
     @State var selectedFunctionIndex = 670
     @State var selectedGraphIndex = 670
     @State var selector = 0
@@ -274,7 +275,18 @@ struct ContentView: View {
         
         for item in Energies{
             plotData.plotArray[0].calculatedText += String(format: "%0.3f\n", item)
+            
+            let waveFunctionForEnergy = calculateWaveFunction(item, SchrodingerConstant, xmin, xmax, xstep)
+            
+            mySolutions.solutionData.append((EnergyPoint: item, xArray: myWaveFunctions.x, psiArray: myWaveFunctions.psi))
+            
+            
         }
+        
+        print(mySolutions.solutionData)
+        
+        
+        
      
         //print(-pow(Double.pi,2)/(SchrodingerConstant * pow(xmin - xmax, 2)))
         

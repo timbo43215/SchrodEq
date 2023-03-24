@@ -40,6 +40,9 @@
 		AB507E8329CE106F005ABD7A /* TextExportDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB507E8229CE106F005ABD7A /* TextExportDocument.swift */; };
 		AB507E8429CE106F005ABD7A /* TextExportDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB507E8229CE106F005ABD7A /* TextExportDocument.swift */; };
 		AB507E8529CE106F005ABD7A /* TextExportDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB507E8229CE106F005ABD7A /* TextExportDocument.swift */; };
+		AB507E8729CE3E02005ABD7A /* Solutions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB507E8629CE3E02005ABD7A /* Solutions.swift */; };
+		AB507E8829CE3E02005ABD7A /* Solutions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB507E8629CE3E02005ABD7A /* Solutions.swift */; };
+		AB507E8929CE3E02005ABD7A /* Solutions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB507E8629CE3E02005ABD7A /* Solutions.swift */; };
 		AB9D4AF329A9683D004906E8 /* SchrodEqApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9D4AF229A9683D004906E8 /* SchrodEqApp.swift */; };
 		AB9D4AF529A9683D004906E8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9D4AF429A9683D004906E8 /* ContentView.swift */; };
 		AB9D4AF729A9683E004906E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB9D4AF629A9683E004906E8 /* Assets.xcassets */; };
@@ -80,6 +83,7 @@
 		AB507E6E29CE084D005ABD7A /* PlotDataStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlotDataStruct.swift; sourceTree = "<group>"; };
 		AB507E7E29CE08B0005ABD7A /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		AB507E8229CE106F005ABD7A /* TextExportDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextExportDocument.swift; sourceTree = "<group>"; };
+		AB507E8629CE3E02005ABD7A /* Solutions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solutions.swift; sourceTree = "<group>"; };
 		AB9D4AEF29A9683D004906E8 /* SchrodEq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchrodEq.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9D4AF229A9683D004906E8 /* SchrodEqApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchrodEqApp.swift; sourceTree = "<group>"; };
 		AB9D4AF429A9683D004906E8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				AB9D4AF629A9683E004906E8 /* Assets.xcassets */,
 				AB507E6B29CE084D005ABD7A /* CalculatePlotData.swift */,
 				AB507E6D29CE084D005ABD7A /* ChangingPlotParameters.swift */,
+				AB507E8629CE3E02005ABD7A /* Solutions.swift */,
 				AB507E6A29CE084D005ABD7A /* PlotClass.swift */,
 				AB507E6C29CE084D005ABD7A /* PlotDataClass.swift */,
 				AB507E7E29CE08B0005ABD7A /* TextView.swift */,
@@ -326,6 +331,7 @@
 				AB09323729B2A739005B1747 /* WaveFunctions.swift in Sources */,
 				AB507E7829CE084D005ABD7A /* ChangingPlotParameters.swift in Sources */,
 				AB09323329B2A6EE005B1747 /* Functionals.swift in Sources */,
+				AB507E8729CE3E02005ABD7A /* Solutions.swift in Sources */,
 				AB507E7F29CE08B0005ABD7A /* TextView.swift in Sources */,
 				AB0B317829B93DDA00C965E0 /* rootFinder.swift in Sources */,
 				AB507E7B29CE084D005ABD7A /* PlotDataStruct.swift in Sources */,
@@ -346,6 +352,7 @@
 				AB09323829B2A739005B1747 /* WaveFunctions.swift in Sources */,
 				AB507E7929CE084D005ABD7A /* ChangingPlotParameters.swift in Sources */,
 				AB09323429B2A6EE005B1747 /* Functionals.swift in Sources */,
+				AB507E8829CE3E02005ABD7A /* Solutions.swift in Sources */,
 				AB507E8029CE08B0005ABD7A /* TextView.swift in Sources */,
 				AB0B317929B93DDA00C965E0 /* rootFinder.swift in Sources */,
 				AB507E7C29CE084D005ABD7A /* PlotDataStruct.swift in Sources */,
@@ -370,6 +377,7 @@
 				AB507E7D29CE084D005ABD7A /* PlotDataStruct.swift in Sources */,
 				AB0B317A29B93DDA00C965E0 /* rootFinder.swift in Sources */,
 				AB507E7129CE084D005ABD7A /* PlotClass.swift in Sources */,
+				AB507E8929CE3E02005ABD7A /* Solutions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
