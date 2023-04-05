@@ -18,14 +18,14 @@ struct ContentView: View {
     @State var estep: String = "0.05"
     @State var eigenValues: String = ""
     @State var output2: String = ""
-    @ObservedObject var myPotentials = Potentials()
-    @ObservedObject var myWaveFunctions = WaveFunctions()
-    @ObservedObject var myFunctionals = Functionals()
-    @ObservedObject var myRootFinder = RootFinder()
-    @ObservedObject var myCalculatePlotData = CalculatePlotData()
-    @ObservedObject var mySolutions = Solutions()
-    @State var selectedFunctionIndex = 670
-    @State var selectedGraphIndex = 670
+    @StateObject var myPotentials = Potentials()
+    @StateObject var myWaveFunctions = WaveFunctions()
+    @StateObject var myFunctionals = Functionals()
+    @StateObject var myRootFinder = RootFinder()
+    @StateObject var myCalculatePlotData = CalculatePlotData()
+    @StateObject var mySolutions = Solutions()
+    @State var selectedFunctionIndex = 0
+    @State var selectedGraphIndex = 0
     @State var selector = 0
     @State var potentialStringArray = ["Infinite Square Well", "Linear Square Well","Parabolic Well","Square and Linear Well","Square Barrier","Triangle Barrier","Coupled Parabolic Well","Coupled Square Well and Field","Harmonic Oscillator","Kronig Penney"]
     @State var graphTypeArray = ["Potential", "Functional", "Energy"]
@@ -143,8 +143,8 @@ struct ContentView: View {
                             .chartYAxis {
                                 AxisMarks(position: .leading)
                             }
-                            //.chartYScale(domain: 0...10)
-                            //.chartXScale(range: 0...5)
+                            .chartYScale(domain: [ plotData.plotArray[selector].changingPlotParameters.yMin ,  plotData.plotArray[selector].changingPlotParameters.yMax ])
+                            .chartXScale(domain: [ plotData.plotArray[selector].changingPlotParameters.xMin ,  plotData.plotArray[selector].changingPlotParameters.xMax ])
                             .padding()
                             Text($plotData.plotArray[selector].changingPlotParameters.xLabel.wrappedValue)
                                 .foregroundColor(.black)
@@ -202,24 +202,116 @@ struct ContentView: View {
         setObjectWillChange(theObject: self.plotData)
         myCalculatePlotData.plotDataModel = self.plotData.plotArray[0]
         
+        switch  selectedGraphIndex {
+            
+        case 0:
+            
+            myCalculatePlotData.theText = "Potential\n"
+            
+            myCalculatePlotData.setThePlotParameters(color: "Blue", xLabel: "x", yLabel: "Potential", title: "Potential")
+            
+  //          myCalculatePlotData.resetCalculatedTextOnMainThread()
+            
+            
+            var thePlotData :[(x: Double, y: Double)] =  []
+            
+            for i in 0..<myPotentials.x.count {
+                let X = myPotentials.x[i]
+                var Y = myPotentials.Potential[i]
+                if Y > 100 {
+                    Y = 100
+                }
+                thePlotData.append((x: X, y: Y))
+            }
+            myCalculatePlotData.appendDataToPlot(plotData: thePlotData)
+            
+            myCalculatePlotData.plotDataModel!.changingPlotParameters.xMax = myPotentials.x.max()! + 2.0
+            
+            myCalculatePlotData.plotDataModel!.changingPlotParameters.xMin = myPotentials.x.min()! - 2.0
+            
+            myCalculatePlotData.plotDataModel!.changingPlotParameters.yMax = 55.0
+            
+            myCalculatePlotData.plotDataModel!.changingPlotParameters.yMin = myPotentials.Potential.min()! - 2.0
+            
+            setObjectWillChange(theObject: self.plotData)
+            
+        case 1:
+            
+            myCalculatePlotData.theText = "Functional\n"
+            
+            myCalculatePlotData.setThePlotParameters(color: "Blue", xLabel: "x", yLabel: "Functional", title: "Fuctional")
+            
+   //         myCalculatePlotData.resetCalculatedTextOnMainThread()
+            
+            
+            var thePlotData :[(x: Double, y: Double)] =  []
+            
+            for i in 0..<myFunctionals.Energy.count {
+                let X = myFunctionals.Energy[i]
+                var Y = myFunctionals.Functional[i]
+                if Y > 100 {
+                    Y = 100
+                }
+                else if Y < -100 {
+                    
+                    Y = -100
+                    
+                }
+                thePlotData.append((x: X, y: Y))
+            }
+            
         
-        myCalculatePlotData.theText = "Potential\n"
-        
-        myCalculatePlotData.setThePlotParameters(color: "Blue", xLabel: "x", yLabel: "Potential", title: "Potential")
-        
-        myCalculatePlotData.resetCalculatedTextOnMainThread()
-        
-        
-        var thePlotData :[(x: Double, y: Double)] =  []
-        
-        for i in 0..<myPotentials.x.count {
-            let X = myPotentials.x[i]
-            let Y = myPotentials.Potential[i]
-            thePlotData.append((x: X, y: Y))
+            myCalculatePlotData.appendDataToPlot(plotData: thePlotData)
+            
+            myCalculatePlotData.plotDataModel!.changingPlotParameters.xMax = myFunctionals.Energy.max()! + 2.0
+            
+            myCalculatePlotData.plotDataModel!.changingPlotParameters.xMin = myFunctionals.Energy.min()! - 2.0
+            
+            myCalculatePlotData.plotDataModel!.changingPlotParameters.yMax = 102.0
+            
+            myCalculatePlotData.plotDataModel!.changingPlotParameters.yMin = -102.0
+            
+            setObjectWillChange(theObject: self.plotData)
+            
+            
+        case 2:
+            
+            myCalculatePlotData.theText = "Wave Function\n"
+            
+            myCalculatePlotData.setThePlotParameters(color: "Blue", xLabel: "x", yLabel: "Wave Function", title: "Wave Function")
+            
+        //    myCalculatePlotData.resetCalculatedTextOnMainThread()
+            
+            
+            var thePlotData :[(x: Double, y: Double)] =  []
+            
+            for i in 0..<myWaveFunctions.x.count {
+                let X = myWaveFunctions.x[i]
+                var Y = myWaveFunctions.psi[i]
+                if Y > 100 {
+                    Y = 100
+                }
+                thePlotData.append((x: X, y: Y))
+            }
+            myCalculatePlotData.appendDataToPlot(plotData: thePlotData)
+            
+            myCalculatePlotData.plotDataModel!.changingPlotParameters.xMax = myWaveFunctions.x.max()! + 2.0
+            
+            myCalculatePlotData.plotDataModel!.changingPlotParameters.xMin = myWaveFunctions.x.min()! - 2.0
+            
+            myCalculatePlotData.plotDataModel!.changingPlotParameters.yMax = myWaveFunctions.psi.max()! + 2.0
+            
+            myCalculatePlotData.plotDataModel!.changingPlotParameters.yMin = myWaveFunctions.psi.min()! - 2.0
+            
+            setObjectWillChange(theObject: self.plotData)
+            
+        default:
+            
+            break
         }
-        myCalculatePlotData.appendDataToPlot(plotData: thePlotData)
         
-        setObjectWillChange(theObject: self.plotData)
+        
+        
     }
     
     func setObjectWillChange(theObject:PlotClass){
